@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="script/md5-min.js"></script>
+<title>Geocatching</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="Style/style.css" media="screen" />
+
+<!-- Partie script-->
+<script>
+//Recuperation du message de notif
+function Authentification(){
+$("#connect").click(function (){
+//recuperation identifiant et mdp
+var username = $("#username").val();
+var mdp = $("#password").val();
+var password = hex_md5(mdp);
+var login = {username:username, password:password};
+// Verifier que le login soit admin ou non.
+if(username == "admin-idse"){
+    var url = "geocatching-Admin.html?token=";
+} else {
+    var url = "geocatching.html?token=";
+}
+//Envoie du login a l'adresse url
+    $.ajax({
+      type: "POST",
+      url: 'http://iut-outils-gl.i3s.unice.fr/jetty/authentication/',
+      headers : { 'Content-Type':'application/x-www-form-urlencoded' },
+      data: login,
+      dataType : 'json',
+      statusCode: {
+        200: function(xhr) {
+            var token = xhr.responseText;
+            //alert( "Success : " + xhr.status + " (ok) et le token : " + token);
+            var urlFinal = url.concat(token);
+            window.location = urlFinal;
+        },
+        401: function(xhr){
+            alert( "Failure : " + xhr.status + " (unauthorized)");
+        }
+      }//StatusCode
+    });//ajax
+  });//conect
+ }
+  </script>
+
+</head>
+<body onload="Authentification();">
+<div id ="Page">
+	<fieldset class = "Title">
+    <legend><h1>GeoCatching</h1></legend>
+    <div id="authentication">
+    Saisir L'identifiant : <input type=text autocomplete="off" id ="username" placeholder="Username"><br>
+    <br>
+    Saisir le mot de passe : <input type=password autocomplete="off" id ="password" placeholder="Password"><br>
+    <br>
+    <button id ="connect">Connexion</button>
+    </div>
+	</fieldset>
+<div id ="tutu"></div>
+</div>
+
+</body>
+</html>

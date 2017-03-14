@@ -1,0 +1,6 @@
+node ('master'){
+
+	checkout scm
+	
+	sh 'mvn -f server/pom.xml clean package'
+}

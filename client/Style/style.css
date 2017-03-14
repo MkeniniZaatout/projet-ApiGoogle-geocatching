@@ -1,0 +1,31 @@
+ html, body {
+		background-color: #222;
+		font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+		font-size: 1em;
+		color: #749e78;
+		line-height: 1.4em;
+
+  	}
+
+	#authentication
+	{
+	text-align:center;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  h1
+  {
+	  padding: 0.5em;
+	  text-align:center;
+  }
+
+  fieldset.Title {
+	border:2px solid ;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    margin: auto;
+	 width: 1%;
+	 display: block;
+  }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Admin</title>
+    <link rel="stylesheet" type="text/css" href="Style/style.css" media="screen" />
+    <script src="script/script.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+</head>
+<body>
+
+<div>
+    <h1>Page "ADMIN" Geoactaching :</h1>
+</div>
+
+<div id="map">
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvrizlP66MjzsT1aZlsZuYb20ifi13S3o&callback=initMap">
+    </script>
+</div>
+    <script>
+            var url = window.location.search;
+            var token = url.substring(url.lastIndexOf("?")+1);
+            $.ajax({
+                type: "POST",
+                url: 'http://iut-outils-gl.i3s.unice.fr/jetty/authentication/admin/session',
+                headers : { 'Content-Type':'application/x-www-form-urlencoded' },
+                data: token,
+                dataType : 'json', // Ton serveur rejourne du JSON, autant demander à jQuery de le parser
+                statusCode: {
+                    401: function(xhr) {
+                        alert("Token incorrect");
+                        var url = "index.html";
+                        window.location = url;
+                    }
+                }//StatusCode
+            });//ajax
+
+    </script>
+
+</body>
+</html>

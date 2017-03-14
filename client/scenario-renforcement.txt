@@ -1,0 +1,16 @@
+﻿Dans la Partie il doit y avoir normalement plusieurs zones (en forme géométrique).
+Quand une zone neutre est capturée par l'équipe A (par exemple), cette zone devient zoneA.
+La zoneA se renforce grâce aux joueurs de l'equipe A qui réussissent le mini-jeu.
+Cette zone s'incrémente alors d'un point (power up).
+Ce qui résultera alors d'une notification en boîte de dialog ! :
+"Votre Equipe a renforcé la zone !" pour les joueurs de la même équipe.
+
+Design Pattern observer :
+-Observer : Un obj qui souhaite être notifié lors du changement d'état d'un autre objet "Joueur" ou "Equipe"(qui contient des membres("Joueur") ?) ;
+-Observable : objet dont l'état peut être intéressant et dans lequel un autre objet semblerai enregistrer un intérêt = "Zone Capturée !"
+
+Les observateur : les joueurs
+
+public void update(Observable obs, Object obj) -> Méthode appelée lors du changement d'état de l'observable.
+
+public void addObserver(Observer obs) -> Ajout d'un observer dans une liste de observer.

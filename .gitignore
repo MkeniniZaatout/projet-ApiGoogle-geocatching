@@ -1,0 +1,51 @@
+# ANGULARJS
+node_modules
+dist
+.tmp
+bower_components
+debug.log
+coverage
+npm-debug.log
+
+# Jetbrains IDEs
+.idea/
+*.iml
+*.class
+
+
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
+# Eclipse IDEs specific git ignore
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+<<<<<<< HEAD
+.settings/
+=======
+settings/
+>>>>>>> origin/sprint2
+.loadpath
+.lock
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Compilation
+site/
+target/

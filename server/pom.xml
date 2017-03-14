@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.unice.iut</groupId>
+	<artifactId>geo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>GeoCatching</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+    <modules>
+        <module>shapes-ws</module>
+		<module>authentification</module>
+		<module>game_logic</module>
+        <!-- add your modules here -->
+    </modules>
+    
+	<dependencies>
+        <!-- Jetty and jersey to deploy webapps -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+			<version>8.1.10.v20130312</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>1.19</version>
+		</dependency>
+        <!-- JUnit -->
+		<dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.4</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+            <!-- Compilation -->
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+        
+            <!-- Jetty plugin -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.10.v20130312</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+                    <!-- Run more than one webapp -->
+                    <contextHandlers>
+                        <!-- First webapp: shapes web service -->
+                        <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+                            <!-- Location of the war to deploy -->
+                            <war>${project.basedir}/shapes-ws/target/shapes-ws-0.0.1-SNAPSHOT.war</war>
+                            <!-- App will be deployed at localhost:8080/shapes-ws-->
+                            <contextPath>/shapes-ws</contextPath>
+							
+                        </contextHandler>
+                        
+                        <!-- Add your other webapps in contextHandler -->
+                        <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+                            <war>${project.basedir}/game_logic/target/game_logic-0.0.1-SNAPSHOT.war</war>
+                            <contextPath>/game_logic</contextPath>
+                        </contextHandler> 
+
+                    </contextHandlers>
+					
+					<!-- Add -->
+					<webApp>
+					<contextPath>/</contextPath>
+					<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+						<resourcesAsCSV>../client</resourcesAsCSV>
+					</baseResource>
+					</webApp>
+				
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
